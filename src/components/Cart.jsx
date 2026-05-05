@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
+import CartItem from "./CartItem";
 
 function Cart() {
   const { cartItems, removeFromCart, totalPrice } = useCart();
@@ -23,21 +24,7 @@ function Cart() {
 
       <div className="cart-items">
         {cartItems.map((item) => (
-          <div className="cart-item" key={item.id}>
-            <div>
-              <h3>{item.title}</h3>
-              <p>
-                {item.quantity} x {item.price.toFixed(2)} €
-              </p>
-            </div>
-
-            <button
-              className="remove-button"
-              onClick={() => removeFromCart(item.id)}
-            >
-              Eliminar
-            </button>
-          </div>
+          <CartItem key={item.id} item={item} onRemove={removeFromCart} />
         ))}
       </div>
 
