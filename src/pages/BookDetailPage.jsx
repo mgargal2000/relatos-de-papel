@@ -1,12 +1,12 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import Cart from "../components/Cart";
-import { useCart } from "../context/CartContext";
+import { useAddToCartWithStockCheck } from "../hooks/useAddToCartWithStockCheck";
 import { books } from "../data/books";
 
 function BookDetailPage() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { addToCart } = useCart();
+  const addToCartChecked = useAddToCartWithStockCheck();
 
   const book = books.find((item) => item.id === Number(id));
 
@@ -24,8 +24,9 @@ function BookDetailPage() {
   }
 
   const handleAddToCart = () => {
-    addToCart(book);
-    navigate("/checkout");
+    if (addToCartChecked(book)) {
+      navigate("/checkout");
+    }
   };
 
   return (

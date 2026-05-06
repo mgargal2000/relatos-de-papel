@@ -1,4 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import Cart from "../components/Cart";
 import { useCart } from "../context/CartContext";
 
@@ -7,9 +8,18 @@ function CheckoutPage() {
   const navigate = useNavigate();
 
   const handlePayment = () => {
-    window.alert("El pedido se ha realizado correctamente.");
-    clearCart();
-    navigate("/libros");
+    Swal.fire({
+      icon: "success",
+      title: "¡Pedido realizado!",
+      text: "El pedido se ha realizado correctamente.",
+      allowOutsideClick: false,
+      showConfirmButton: false,
+      timer: 2000,
+      didClose: () => {
+        clearCart();
+        navigate("/libros");
+      }
+    });
   };
 
   if (cartItems.length === 0) {
