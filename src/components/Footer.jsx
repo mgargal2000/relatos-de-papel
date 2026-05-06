@@ -1,3 +1,5 @@
+import AppConstant from "../data/AppConstantConfig.js"
+
 function Footer() {
   const currentYear = new Date().getFullYear();
 
@@ -12,7 +14,7 @@ function Footer() {
 
           <div className="footer-section">
             <h3>Información</h3>
-            <p>Versión 1.0.0</p>
+            <p>Versión {AppConstant.VERSION}</p>
             <p>&copy; {currentYear} Relatos de Papel</p>
           </div>
         </div>
